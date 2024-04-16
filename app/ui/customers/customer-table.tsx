@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
-import Search from '@/app/ui/search';
+import Search from '@/app/ui/customer-search';
 import { fetchAllCustomersInformation } from '@/app/lib/data';
+import { DeleteCustomer, UpdateCustomer, CreateCustomer } from '../customers/buttons';
 
 export default async function CustomerInfoTable() { 
     const customers = await fetchAllCustomersInformation();
@@ -11,7 +12,7 @@ export default async function CustomerInfoTable() {
       <h1 className={`${lusitana.className} mb-8 text-xl md:text-2xl`}>
         Customers
       </h1>
-      <Search placeholder="Search customers..." />
+      <Search placeholder="Search customers..."/>
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full align-middle">
@@ -73,6 +74,10 @@ export default async function CustomerInfoTable() {
                       </td>
                       <td className="whitespace-nowrap bg-white px-4 py-5 text-sm">
                         {customer.email}
+                      </td>
+                      <td className="whitespace-nowrap bg-white flex justify-end gap-2">
+                            <UpdateCustomer />
+                            <DeleteCustomer />
                       </td>
                     </tr>
                   ))}
